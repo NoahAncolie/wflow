@@ -1,17 +1,32 @@
 {
   "name": "@wflow/db",
   "version": "0.0.1",
+  "private": true,
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
-  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "db:pull": "drizzle-kit pull --config=./drizzle.config.ts",
+    "db:generate": "drizzle-kit generate --config=./drizzle.config.ts",
+    "db:push": "drizzle-kit push --config=./drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=./drizzle.config.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.7",
+    "env": "^0.0.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.7"
   }
 }

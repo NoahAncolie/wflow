@@ -7,6 +7,10 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": ["build"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
@@ -16,6 +20,26 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "db:pull": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs": ["packages/db"]
+    },
+    "db:generate": {
+      "cache": false,
+      "dependsOn": ["db:pull"],
+      "outputs": ["packages/db/drizzle/**"]
+    },
+    "db:push": {
+      "cache": false,
+      "dependsOn": ["db:generate"],
+      "outputs": []
+    },
+    "db:studio": {
+      "cache": false,
+      "dependsOn": ["db:pull"],
+      "outputs": []
     }
   }
 }
